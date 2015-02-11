@@ -1,30 +1,94 @@
 var express = require('express');
 var router = express.Router();
-var request = require('request');
 
 /*
  * GET userlist.
  */
 router.get('/results', function(req, res) {
+    /*var carResults = {"results":[
+        {"carType":"Economy", "carVendor":"Hertz", "price":"$10"}, 
+        {"carType":"Compact",    "carVendor":"Enterprise", "price":"$20"},
+        {"carType":"Mid Size", "carVendor":"Thrifty", "price":"$30"}
+    ]} */
+   var cars = {
+   	
+   	 "searchParam": {
+	    "destination": "DAL",
+	    "pickup": "HOU",
+	    "dropOff": "DAL"
+	 },
+	 "searchId": "123",
+	 "results": [
+	      {
+	        "id": "s1",
+	        "pgoods": [
+	          {
+	            "pgoodId": "p1-1",
+	            "carType": "ECO",
+	            "carVendor": "Enterprize",
+	            "price": "250",
+	            "isOpaque": true,
+	            "depositType": "Credit"
 
-var data ='';
-var request = require("request");
- 
-request('http://localhost:3002/crs/results', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        data = JSON.parse(body);
-        res.json(data);
-        
-		request({
-  			uri: "http://localhost:3100/log/warn",
-  			method: "POST",
-  			form: data
-  		});
-    } else {
-     	res.json('error');
-    }
-})
+	          }
+	        ]
+	      },
+	      {
+	      	"id": "s2",
+	        "pgoods": [
+	          {
+	            "pgoodId": "p2-1",
+	            "carType": "COM",
+	            "carVendor": "Thrifty",
+	            "price": "200",
+	            "isOpaque": true,
+	            "depositType": "Credit"
+	          }
+	        ]
+	      },
+	      {
+	        "id": "s3",
+	        "pgoods": [
+	          {
+	            "pgoodId": "p3-1",
+	            "carType": "ECO",
+	            "carVendor": "Dollar",
+	            "price": "150",
+	            "isOpaque": true,
+	            "depositType": "Credit"
+	          }
+	        ]
+	      },
+	      {
+	        "id": "s4",
+	        "pgoods": [
+	          {
+	            "pgoodId": "p4-1",
+	            "carType": "ECO",
+	            "carVendor": "Enterprize",
+	            "price": "230",
+	            "isOpaque": false,
+	            "depositType": "Credit"
+	          }
+	        ]
+	      },
+	      {
+	        "id": "s5",
+	        "pgoods": [
+	          {
+	            "pgoodId": "p5-1",
+	            "carType": "ECO",
+	            "carVendor": "MidWay",
+	            "price": "170",
+	            "isOpaque": false,
+	            "depositType": "Credit"
+	          }
+	        ]
+	      },
+	    ]
+	 };
 
+    res.json(cars);
 });
 
 
