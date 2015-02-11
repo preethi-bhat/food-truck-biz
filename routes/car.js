@@ -68,7 +68,7 @@ router.get('/results', function(req, res) {
 	            "carVendor": "Enterprize",
 	            "price": "230",
 	            "isOpaque": false,
-	            "depositType": "Credit"
+	            "depositType": "Debit"
 	          }
 	        ]
 	      },
@@ -81,7 +81,7 @@ router.get('/results', function(req, res) {
 	            "carVendor": "MidWay",
 	            "price": "170",
 	            "isOpaque": false,
-	            "depositType": "Credit"
+	            "depositType": "Debit"
 	          }
 	        ]
 	      },
