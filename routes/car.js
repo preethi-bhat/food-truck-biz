@@ -23,6 +23,9 @@ request('http://localhost:3002/crs/results', function (error, response, body) {
     } else {
      	res.json('error');
     }
+   process.on('uncaughtException', function (err) {
+    console.log(err);
+});
 })
 
 });
