@@ -13,11 +13,13 @@ router.get('/results', function(req, res) {
 
 
 var data ='';
+winston.info(SERVICE_PREFIX + 'Calling CRS service');
 request('http://localhost:3002/crs/results', function (error, response, body) {
     if (!error && response.statusCode == 200) {
         data = JSON.parse(body);
 
-	winston.info(SERVICE_PREFIX + 'Calling offer Service to process results : %s', data);
+	   winston.info(SERVICE_PREFIX + 'CRS service response: %s', data);
+     winston.info(SERVICE_PREFIX + 'Calling Offer service');
 
 		request({
   			uri: "http://localhost:3003/offer/results",
@@ -25,16 +27,15 @@ request('http://localhost:3002/crs/results', function (error, response, body) {
   			form: data,
   			},
   			function(error, response, body) {
-  				console.log(body);
   				var offerRes = JSON.parse(body);
-  				winston.info(SERVICE_PREFIX + 'Got processed  results from offer service: %s', offerRes);
+  				winston.info(SERVICE_PREFIX + 'Offer service response: %s', offerRes);
 
 				res.json(offerRes)
 
   			});
     		} else {
-    			   winston.error(SERVICE_PREFIX + 'Received an error while calling CRS Service %s', error);
-     			res.json('error');
+    		    winston.error(SERVICE_PREFIX + 'Received an error while calling CRS Service %s', error);
+     			  res.json('error');
     		}
   });
 
