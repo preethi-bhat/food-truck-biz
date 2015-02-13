@@ -10,6 +10,8 @@ router.get('/results', function(req, res) {
   var start = new Date().getTime();
 
   var data ='';
+  var offerRes ='';
+  var priceRes ='';
   winston.info(SERVICE_PREFIX + 'Calling CRS service');
   request('http://localhost:3002/crs/results', function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -28,13 +30,27 @@ router.get('/results', function(req, res) {
           }
           var offerRes = JSON.parse(body);
           winston.info(SERVICE_PREFIX + 'Offer service response: ', offerRes);
-          winston.info(SERVICE_PREFIX + 'Calling filter service');
+          winston.info(SERVICE_PREFIX + 'Calling price service');
+        
 
+        request({
+            uri: "http://localhost:3005/car/price",
+            method: "POST",
+            form: offerRes,
+        },
+        function(error, response, pricedResponse) {
+          if(error){
+            winston.error('Received error from Price Service');
+          }
+          var priceRes = JSON.parse(pricedResponse);
+          winston.info(SERVICE_PREFIX + 'Price service response: ', priceRes);
+          winston.info(SERVICE_PREFIX + 'Calling filter service');
+         
 
           request({
               uri: 'http://localhost:3004/filter',
               method: 'POST',
-              json: offerRes
+              json: priceRes,
             }, function (error, response, filteredResponse) {
                 if (error) {
                   next(error);
@@ -47,8 +63,9 @@ router.get('/results', function(req, res) {
 
                 winston.warn(SERVICE_PREFIX + 'Execution time(ms) = ', executionTime);
                });
+               });
+               });
 
-        });
     } 
     else {
         winston.error(SERVICE_PREFIX + 'Received an error while calling CRS Service %s', error);
