@@ -21,14 +21,15 @@ router.get('/results', function(req, res) {
             form: data,
         },
         function(error, response, body) {
+          if(error){
+            winston.error('Received error from Offer Service');
+          }
           var offerRes = JSON.parse(body);
           winston.info(SERVICE_PREFIX + 'Offer service response: %s', offerRes);
-          res.json(offerRes)
         });
     } 
     else {
         winston.error(SERVICE_PREFIX + 'Received an error while calling CRS Service %s', error);
-        res.json('error');
     }
   });
 
