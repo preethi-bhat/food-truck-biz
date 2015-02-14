@@ -50,7 +50,7 @@ router.get('/results', function(req, res) {
          
 
           request({
-              uri: 'http://localhost:3004/filter',
+              uri: 'http://localhost:3004/car/filter',
               method: 'POST',
               json: priceRes,
             }, function (error, response, filteredResponse) {
