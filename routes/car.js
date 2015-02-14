@@ -12,12 +12,13 @@ router.get('/results', function(req, res) {
   var data ='';
   var offerRes ='';
   var priceRes ='';
+
   winston.info(SERVICE_PREFIX + 'Calling CRS service');
   request('http://localhost:3002/crs/results', function (error, response, body) {
     if (!error && response.statusCode == 200) {
         data = JSON.parse(body);
-        winston.info(SERVICE_PREFIX + 'CRS service response: ', data);
-        winston.info(SERVICE_PREFIX + 'Calling Offer service');
+        winston.info(SERVICE_PREFIX + 'Received response from CRS service');
+        winston.info(SERVICE_PREFIX + 'Calling Clustering service');
 
         request({
             uri: "http://localhost:3003/offer/results",
@@ -26,10 +27,11 @@ router.get('/results', function(req, res) {
         },
         function(error, response, body) {
           if(error){
-            winston.error('Received error from Offer Service');
+            winston.error('Received error from Clustering service: ', error);
+            return;
           }
           var offerRes = JSON.parse(body);
-          winston.info(SERVICE_PREFIX + 'Offer service response: ', offerRes);
+          winston.info(SERVICE_PREFIX + 'Received response from Clustering service');
           winston.info(SERVICE_PREFIX + 'Calling price service');
         
 
@@ -41,9 +43,10 @@ router.get('/results', function(req, res) {
         function(error, response, pricedResponse) {
           if(error){
             winston.error('Received error from Price Service');
+            return;
           }
           var priceRes = JSON.parse(pricedResponse);
-          winston.info(SERVICE_PREFIX + 'Price service response: ', priceRes);
+          winston.info(SERVICE_PREFIX + 'Received response from price service');
           winston.info(SERVICE_PREFIX + 'Calling filter service');
          
 
@@ -56,7 +59,7 @@ router.get('/results', function(req, res) {
                   next(error);
                   return;
                 }
-                winston.info(SERVICE_PREFIX + 'Offer service response: ', filteredResponse);
+                winston.info(SERVICE_PREFIX + 'Received response from price service');
 
                 res.json(filteredResponse);
                 var executionTime = new Date().getTime() - start;
@@ -69,6 +72,7 @@ router.get('/results', function(req, res) {
     } 
     else {
         winston.error(SERVICE_PREFIX + 'Received an error while calling CRS Service %s', error);
+        return;
     }
   });
 
