@@ -8,10 +8,10 @@ var SERVICE_PREFIX = 'Orchestration Service: '
 router.get('/results', function(req, res) {
 
   var start = new Date().getTime();
-
   var data ='';
   var offerRes ='';
   var priceRes ='';
+  
   winston.info(SERVICE_PREFIX + 'Calling CRS service');
   request('http://localhost:3002/crs/results', function (error, response, body) {
     if (!error && response.statusCode == 200) {
