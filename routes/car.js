@@ -8,7 +8,6 @@ var SERVICE_PREFIX = 'Orchestration Service: '
 router.get('/results', function(req, res) {
 
   var start = new Date().getTime();
-
   var data ='';
   var offerRes ='';
   var priceRes ='';
