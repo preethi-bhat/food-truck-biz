@@ -20,7 +20,7 @@ router.get('/results', function(req, res) {
         winston.info(SERVICE_PREFIX + 'Calling Clustering service');
 
         request({
-            uri: "http://localhost:3003/offer/results",
+            uri: "http://localhost:3003/cluster/results",
             method: "POST",
             form: data,
         },
