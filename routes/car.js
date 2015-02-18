@@ -30,7 +30,7 @@ router.post('/results', function(req, res) {
     request({
         uri: "http://localhost:3003/cluster/results",
         method: "POST",
-        body: crsbody,
+        form: JSON.parse(crsbody),
     }, function(error, response, clusterbody) {
       if(error) {
         winston.error('Received error from Clustering service: ', error);
