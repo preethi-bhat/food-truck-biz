@@ -23,6 +23,21 @@ router.post('/results', function(req, res) {
       return;
     }
     winston.info(SERVICE_PREFIX + 'Received response from CRS service');
+    
+    // ***************** Pre Cluster Filter SERVICE *****************
+    winston.info(SERVICE_PREFIX + 'Calling pre Cluster filter service');
+    request({
+    	uri: 'http://localhost:3004/car/prefilter',
+        method: 'POST',
+        form: JSON.parse(crsbody),
+    }, function (error, response, preClusteredFilteredResponse) {
+	  if (error) {
+		next(error);
+        return;
+      }
+      
+      winston.info(SERVICE_PREFIX + 'Received response from pre Cluster filter service');
+      var preClusteredFilteredRes = JSON.parse(preClusteredFilteredResponse);
 
     // ***************** Cluster SERVICE *****************
     var start = new Date().getTime();
@@ -30,7 +45,7 @@ router.post('/results', function(req, res) {
     request({
         uri: "http://localhost:3003/cluster/results",
         method: "POST",
-        form: JSON.parse(crsbody),
+        form: preClusteredFilteredRes,
     }, function(error, response, clusterbody) {
       if(error) {
         winston.error('Received error from Clustering service: ', error);
@@ -75,7 +90,7 @@ router.post('/results', function(req, res) {
             winston.info(SERVICE_PREFIX + 'Received response from winner selection service');
 
 
-            // ***************** Filter SERVICE *****************
+            // ***************** Post Cluster Filter SERVICE *****************
             winston.info(SERVICE_PREFIX + 'Calling filter service');
             request({
                 uri: 'http://localhost:3004/car/filter',
@@ -123,7 +138,7 @@ router.post('/results', function(req, res) {
           
           winston.warn(SERVICE_PREFIX + 'WINNER SELECTION DISABLED')
           // ***************** Filter SERVICE *****************
-          winston.info(SERVICE_PREFIX + 'Calling filter service');
+          winston.info(SERVICE_PREFIX + 'Calling post cluster filter service');
           request({
               uri: 'http://localhost:3004/car/filter',
               method: 'POST',
@@ -134,7 +149,7 @@ router.post('/results', function(req, res) {
                 return;
               }
 
-              winston.info(SERVICE_PREFIX + 'Received response from filter service');
+              winston.info(SERVICE_PREFIX + 'Received response from post cluster filter service');
               var filteredRes = JSON.parse(filteredResponse);
 
               // ***************** Sort SERVICE *****************
@@ -163,11 +178,12 @@ router.post('/results', function(req, res) {
 
                 winston.warn(SERVICE_PREFIX + 'Execution time excluding CRS and Pricing (ms) = ', totalExecutionTime);
               }); // End of sort
-           }); // End of filter
+           }); // End of Post Cluster Filter
         }
         
       }); // End of price
     }); // End of cluster
+    }); // End Pre Cluster Filter
   }); // End of crs
 
   
