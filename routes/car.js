@@ -146,8 +146,7 @@ router.post('/results', function(req, res) {
                   var executionTimeSort = timeEndSort - timeStartSort;
 
                   var totalExecutionTime = executionTimePreFilter + executionTimeCluster +
-                                           executionTimePrice + executionTimeWinner +
-                                           executionTimePostFilter + executionTimeSort;
+                                           executionTimeWinner + executionTimePostFilter + executionTimeSort;
                   sortRS.executionTime = totalExecutionTime;
 
                   res.json(sortRS);
@@ -218,7 +217,7 @@ router.post('/results', function(req, res) {
                 var executionTimeSort = timeEndSort - timeStartSort;
 
                 var totalExecutionTime = executionTimePreFilter + executionTimeCluster +
-                                         executionTimePrice  + executionTimePostFilter + executionTimeSort;
+                                         executionTimePostFilter + executionTimeSort;
                 sortRS.executionTime = totalExecutionTime;
 
                 res.json(sortRS);
