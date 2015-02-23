@@ -6,3 +6,8 @@ node_modules/
 
 # Log
 npm-debug.log
+
+# Temporary files
+*~
+*#*
+.DS_Store
