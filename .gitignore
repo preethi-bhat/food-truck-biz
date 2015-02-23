@@ -1,1 +1,8 @@
-npm-debug*
+# Projectile config
+.projectile
+
+# Lib
+node_modules/
+
+# Log
+npm-debug.log
