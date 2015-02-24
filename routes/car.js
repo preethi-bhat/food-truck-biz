@@ -60,6 +60,7 @@ router.post('/results', function (req, res) {
                 winston.info(SERVICE_PREFIX + 'Received response from Clustering service');
                 var timeEndCluster = new Date().getTime();
 
+
                 // ***************** Pricing SERVICE *****************
                 var timeStartPricing = new Date().getTime();
                 winston.info(SERVICE_PREFIX + 'Calling price service');
@@ -156,6 +157,7 @@ router.post('/results', function (req, res) {
                                         var executionTimePreFilter = timeEndPreFilter - timeStartPreFilter;
                                         var executionTimeCluster = timeEndCluster - timeStartCluster;
                                         var executionTimePrice = timeEndPricing - timeStartPricing;
+                                        var executionTimeDepositTypeFilter = timeEndPostDepositFilter - timeStartPostDespositFilter;
                                         var executionTimeWinner = timeEndWinner - timeStartWinner;
                                         var executionTimePostFilter = timeEndPostFilter - timeStartPostFilter;
                                         var executionTimeSort = timeEndSort - timeStartSort;
@@ -172,6 +174,7 @@ router.post('/results', function (req, res) {
                                         winston.warn(SERVICE_PREFIX + 'Execution time of Pre filter (ms) = ', executionTimePreFilter);
                                         winston.warn(SERVICE_PREFIX + 'Execution time of Cluster (ms) = ', executionTimeCluster);
                                         winston.warn(SERVICE_PREFIX + 'Execution time of Price (ms) = ', executionTimePrice);
+                                        winston.warn(SERVICE_PREFIX + 'Execution time of DepositTypeFilter (ms) = ', executionTimeDepositTypeFilter);
                                         winston.warn(SERVICE_PREFIX + 'Execution time of Winner (ms) = ', executionTimeWinner);
                                         winston.warn(SERVICE_PREFIX + 'Execution time of Post filter (ms) = ', executionTimePostFilter);
                                         winston.warn(SERVICE_PREFIX + 'Execution time of Sort (ms) = ', executionTimeSort);
@@ -229,6 +232,7 @@ router.post('/results', function (req, res) {
                                     var executionTimePreFilter = timeEndPreFilter - timeStartPreFilter;
                                     var executionTimeCluster = timeEndCluster - timeStartCluster;
                                     var executionTimePrice = timeEndPricing - timeStartPricing;
+                                    var executionTimeDepositTypeFilter = timeEndPostDepositFilter - timeStartPostDespositFilter;
                                     var executionTimePostFilter = timeEndPostFilter - timeStartPostFilter;
                                     var executionTimeSort = timeEndSort - timeStartSort;
 
@@ -244,6 +248,7 @@ router.post('/results', function (req, res) {
                                     winston.warn(SERVICE_PREFIX + 'Execution time of Pre filter (ms) = ', executionTimePreFilter);
                                     winston.warn(SERVICE_PREFIX + 'Execution time of Cluster (ms) = ', executionTimeCluster);
                                     winston.warn(SERVICE_PREFIX + 'Execution time of Price (ms) = ', executionTimePrice);
+                                    winston.warn(SERVICE_PREFIX + 'Execution time of DepositTypeFilter (ms) = ', executionTimeDepositTypeFilter);
                                     winston.warn(SERVICE_PREFIX + 'Execution time of Winner (ms) = N/A');
                                     winston.warn(SERVICE_PREFIX + 'Execution time of Post filter (ms) = ', executionTimePostFilter);
                                     winston.warn(SERVICE_PREFIX + 'Execution time of Sort (ms) = ', executionTimeSort);
