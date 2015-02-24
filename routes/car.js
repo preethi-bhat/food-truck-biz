@@ -66,7 +66,8 @@ router.post('/results', function (req, res) {
                 request({
                     uri: "http://localhost:3005/car/price",
                     method: "POST",
-                    form: offerRes,
+                    body: offerRes,
+                    json: true
                 }, function (error, response, pricedResponse) {
                     if (error) {
                         winston.error('Received error from Price Service');
@@ -74,7 +75,7 @@ router.post('/results', function (req, res) {
                     }
 
                     var startFilter = new Date().getTime();
-                    var priceRes = JSON.parse(pricedResponse);
+                    var priceRes = pricedResponse;
                     winston.info(SERVICE_PREFIX + 'Received response from price service');
                     var timeEndPricing = new Date().getTime();
 
