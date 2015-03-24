@@ -9,10 +9,10 @@ ADD . /root/app
 # RUN echo "export PATH=\"node_modules/.bin:$PATH\"" >> /root/.bashrc
 
 # expose the port where the app is listening
-EXPOSE 3001
+EXPOSE 4004
 
 # change current workdir to app
 WORKDIR /root/app
 
-# run the app
-CMD npm start
+# install all dependencies and start server
+CMD npm install && npm start 4004
