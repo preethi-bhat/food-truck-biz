@@ -1,0 +1,137 @@
+[ {
+  "location" : {
+    "needs_recoding" : false,
+    "longitude" : "-122.398658184594",
+    "latitude" : "37.7901490874965"
+  },
+  "status" : "REQUESTED",
+  "expirationdate" : "2015-03-15T00:00:00",
+  "permit" : "15MFF-0073",
+  "block" : "3708",
+  "received" : "Mar 16 2015 12:33PM",
+  "facilitytype" : "Truck",
+  "blocklot" : "3708055",
+  "locationdescription" : "01ST ST: STEVENSON ST to JESSIE ST (21 - 56)",
+  "cnn" : "101000",
+  "priorpermit" : "0",
+  "schedule" : "http://bsm.sfdpw.org/PermitsTracker/reports/report.aspx?title=schedule&report=rptSchedule&params=permit=15MFF-0073&ExportPDF=1&Filename=15MFF-0073_schedule.pdf",
+  "address" : "50 01ST ST",
+  "applicant" : "Cupkates Bakery, LLC",
+  "lot" : "055",
+  "fooditems" : "Cupcakes",
+  "longitude" : "-122.398658184604",
+  "latitude" : "37.7901490737255",
+  "objectid" : "632078",
+  "y" : "2115738.283",
+  "x" : "6013063.33"
+}
+, {
+  "location" : {
+    "needs_recoding" : false,
+    "longitude" : "-122.39754345992",
+    "latitude" : "37.7901633979667"
+  },
+  "status" : "REQUESTED",
+  "permit" : "14MFF-0133",
+  "block" : "3709",
+  "received" : "Nov 10 2014  2:57PM",
+  "blocklot" : "3709008",
+  "locationdescription" : "01ST ST: ELIM ALY to MISSION ST (72 - 99)",
+  "cnn" : "103000",
+  "priorpermit" : "0",
+  "schedule" : "http://bsm.sfdpw.org/PermitsTracker/reports/report.aspx?title=schedule&report=rptSchedule&params=permit=14MFF-0133&ExportPDF=1&Filename=14MFF-0133_schedule.pdf",
+  "address" : "97 01ST ST",
+  "applicant" : "Missing Link SF",
+  "lot" : "008",
+  "fooditems" : "smoked sausages: deer: wild boar: pheasant: buffalo: beef: turkey: coleslaw: vegetarian baked beans, cheese",
+  "longitude" : "-122.39754345993",
+  "latitude" : "37.7901633841957",
+  "objectid" : "598046",
+  "y" : "2115736.96",
+  "x" : "6013385.483"
+}
+, {
+  "location" : {
+    "needs_recoding" : false,
+    "longitude" : "-122.395881039325",
+    "latitude" : "37.7891192214396"
+  },
+  "status" : "EXPIRED",
+  "expirationdate" : "2015-03-15T00:00:00",
+  "permit" : "14MFF-0035",
+  "block" : "3720",
+  "received" : "Mar 13 2014 12:14PM",
+  "facilitytype" : "Truck",
+  "blocklot" : "3720008",
+  "locationdescription" : "01ST ST: NATOMA ST to HOWARD ST (165 - 199)",
+  "cnn" : "106000",
+  "priorpermit" : "0",
+  "approved" : "2014-03-13T12:25:46",
+  "schedule" : "http://bsm.sfdpw.org/PermitsTracker/reports/report.aspx?title=schedule&report=rptSchedule&params=permit=14MFF-0035&ExportPDF=1&Filename=14MFF-0035_schedule.pdf",
+  "address" : "400 HOWARD ST",
+  "applicant" : "Cheese Gone Wild",
+  "lot" : "008",
+  "fooditems" : "Grilled Cheese Sandwiches",
+  "longitude" : "-122.395881039335",
+  "latitude" : "37.7891192076677",
+  "objectid" : "526147",
+  "y" : "2115347.09492",
+  "x" : "6013858.05956"
+}
+, {
+  "location" : {
+    "needs_recoding" : false,
+    "longitude" : "-122.394594036195",
+    "latitude" : "37.7879001115912"
+  },
+  "status" : "APPROVED",
+  "expirationdate" : "2016-03-15T00:00:00",
+  "permit" : "15MFF-0058",
+  "block" : "3737",
+  "received" : "Mar 12 2015  2:24PM",
+  "facilitytype" : "Truck",
+  "blocklot" : "3737012",
+  "locationdescription" : "01ST ST: CLEMENTINA ST to FOLSOM ST (245 - 299)",
+  "cnn" : "110000",
+  "priorpermit" : "1",
+  "approved" : "2015-03-12T14:30:02",
+  "schedule" : "http://bsm.sfdpw.org/PermitsTracker/reports/report.aspx?title=schedule&report=rptSchedule&params=permit=15MFF-0058&ExportPDF=1&Filename=15MFF-0058_schedule.pdf",
+  "address" : "245 01ST ST",
+  "applicant" : "Mini Mobile Food Catering",
+  "lot" : "012",
+  "fooditems" : "Cold Truck: Corn Dogs: Noodle Soups: Candy: Pre-packaged Snacks: Sandwiches: Chips: Coffee: Tea: Various Beverages",
+  "longitude" : "-122.394594036205",
+  "latitude" : "37.7879000978181",
+  "objectid" : "630926",
+  "y" : "2114895.75",
+  "x" : "6014220.898"
+}
+, {
+  "location" : {
+    "needs_recoding" : false,
+    "longitude" : "-122.39347293179",
+    "latitude" : "37.7860914772"
+  },
+  "status" : "APPROVED",
+  "expirationdate" : "2016-03-15T00:00:00",
+  "permit" : "15MFF-0064",
+  "block" : "3749",
+  "received" : "Mar 13 2015  1:36PM",
+  "facilitytype" : "Truck",
+  "blocklot" : "3749058",
+  "locationdescription" : "01ST ST: LANSING ST to HARRISON ST \\ I-80 E ON RAMP (362 - 399)",
+  "cnn" : "113000",
+  "priorpermit" : "1",
+  "approved" : "2015-03-13T13:40:01",
+  "schedule" : "http://bsm.sfdpw.org/PermitsTracker/reports/report.aspx?title=schedule&report=rptSchedule&params=permit=15MFF-0064&ExportPDF=1&Filename=15MFF-0064_schedule.pdf",
+  "address" : "390 01ST ST",
+  "applicant" : "Steve's Mobile Deli",
+  "lot" : "058",
+  "fooditems" : "Cold Truck: Pre-packaged sandwiches: Burgers: Hot Dogs: Muffin Sandwiches: Enchiladas: Bagels: Burritos: Salads: Snacks: Beverages",
+  "longitude" : "-122.3934729318",
+  "latitude" : "37.7860914634251",
+  "objectid" : "631766",
+  "y" : "2114230.765",
+  "x" : "6014531.475"
+}
+ ]
