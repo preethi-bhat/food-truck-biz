@@ -1,5 +1,5 @@
 {
-  "name": “bizservice",
+  "name": "orchestrationservice",
   "version": "0.0.1",
   "private": true,
   "scripts": {
