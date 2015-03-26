@@ -1,4 +1,6 @@
 # food-truck-biz
+This repository contains the code for the business logic service.
+
 
 Description of the problem
  - This app aims to create a service that tells the user what types of food trucks might be found near a specific location on a map. In addition, the user can enter the type of food or the name of the food cart that he/she wants to find around the user's current location. The results are displayed on the map and listed in a tabular fashion.
