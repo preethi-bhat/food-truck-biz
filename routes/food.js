@@ -10,6 +10,8 @@ router.post('/localresults', function (req, res) {
 
     winston.info('Request made to biz service request:', req.body);
     winston.info('Filter criteria: ', req.body.searchQuery)
+    var resultsToReturn = {};
+
     
     winston.info('Filtering results by truck name')
     // Filter by truck name
@@ -40,7 +42,10 @@ router.post('/localresults', function (req, res) {
 		sortedResults = foodTruck.sortAlphabetically(uniqueArray);
 	}
 
-    res.json(sortedResults);
+    resultsToReturn.results = sortedResults;
+	resultsToReturn.mapLat = req.body.userLatitude;
+	resultsToReturn.mapLng = req.body.userLongitude;
+	res.json(resultsToReturn);
 
 }); // End of router
 
