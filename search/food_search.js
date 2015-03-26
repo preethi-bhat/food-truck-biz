@@ -14,14 +14,19 @@ var foodTruck = module.exports = {};
 * @return An array where all the applicant name contains the search string
 */
 foodTruck.filterByTruckName = function(inputArray, searchQuery) {
-    var filteredArray = inputArray.filter(function(item, pos) {
-    	var item_applicant_lower = item.applicant.toLowerCase();
-    	var query_lower = searchQuery.toLowerCase();
-    	// Return true if the applicant name contains the query string
-    	return item_applicant_lower.indexOf(query_lower) > -1;
-	})
+	if (inputArray) {
+    	var filteredArray = inputArray.filter(function(item, pos) {
+    		var item_applicant_lower = item.applicant.toLowerCase();
+    		var query_lower = searchQuery.toLowerCase();
+    		// Return true if the applicant name contains the query string
+    		return item_applicant_lower.indexOf(query_lower) > -1;
+		})
 	
-	return filteredArray;
+		return filteredArray;
+	}
+	else {
+		winston.warn('Input array not valid while filtering by truck name:', inputArray)
+	}
 }
 
 /**
@@ -32,20 +37,25 @@ foodTruck.filterByTruckName = function(inputArray, searchQuery) {
 * @return An array where all search string is present in the food items
 */
 foodTruck.filterByFoodItem = function(inputArray, searchQuery) {
-    var filteredArray = inputArray.filter(function(item, pos) {
-    	if (item.fooditems) {
-    		var item_fooditems_lower = item.fooditems.toLowerCase();
-    		var query_lower = searchQuery.toLowerCase();
-    		// Return true if the applicant name contains the query string
-    		return item_fooditems_lower.indexOf(query_lower) > -1;
-    	}
-    	else {
-    		// No food items present for this element.
-    		return false;
-    	}
-	})
+	if (inputArray) {
+		var filteredArray = inputArray.filter(function(item, pos) {
+    		if (item.fooditems) {
+    			var item_fooditems_lower = item.fooditems.toLowerCase();
+    			var query_lower = searchQuery.toLowerCase();
+    			// Return true if the applicant name contains the query string
+    			return item_fooditems_lower.indexOf(query_lower) > -1;
+    		}
+    		else {
+    			// No food items present for this element.
+    			return false;
+    		}
+		})
 	
-	return filteredArray;
+		return filteredArray;
+	}
+	else {
+		winston.warn('Input array not valid while filtering by food item:', inputArray)
+	}
 }
 
 /**
@@ -59,18 +69,24 @@ foodTruck.filterByFoodItem = function(inputArray, searchQuery) {
 * @return An array where all trucks are within "miles" miles from "lat/lng"
 */
 foodTruck.filterByDistance = function(inputArray, lat, lng, miles) {
-    var filteredArray = inputArray.filter(function(item, pos) {
-    	if (item.latitude && item.longitude) {
-    		dist = foodTruck.distance(item.latitude, item.longitude, lat, lng);
-    		return (dist <= miles);
-    	}
-    	else {
-    		// Does not have a lat/long
-    		return false;
-    	}
-	})
+	if (inputArray) {
+		var filteredArray = inputArray.filter(function(item, pos) {
+    		if (item.latitude && item.longitude) {
+    			dist = foodTruck.distance(item.latitude, item.longitude, lat, lng);
+    			return (dist <= miles);
+    		}
+    		else {
+    			// Does not have a lat/long
+    			winston.warn('Food truck with name: ' + item.applicant + ' does not contain a lat/long');
+    			return false;
+    		}
+		})
 	
-	return filteredArray;
+		return filteredArray;
+	}
+	else {
+		winston.warn('Input array not valid while filtering by distance:', inputArray)
+	}
 }
 
 /**
@@ -79,11 +95,16 @@ foodTruck.filterByDistance = function(inputArray, lat, lng, miles) {
 * @return An array without any duplicates
 */
 foodTruck.removeDuplicates = function(inputArray) {
-    var uniqueArray = inputArray.filter(function(elem, pos) {
-    	return inputArray.indexOf(elem) == pos;
-	})
+	if (inputArray) {
+		var uniqueArray = inputArray.filter(function(elem, pos) {
+    		return inputArray.indexOf(elem) == pos;
+		})
 	
-	return uniqueArray;
+		return uniqueArray;
+	}
+	else {
+		winston.warn('Input array not valid while removing duplicates:', inputArray)
+	}   
 }
 
 /**
@@ -96,30 +117,34 @@ foodTruck.removeDuplicates = function(inputArray) {
 * @return An sorted array in ascending order by distance 
 */
 foodTruck.sortByDistance = function(foodTruckData, userLatitude, userLongitude) {
-	var sortedResults;
-	var LARGE_NUMBER = 9999;
-    //ascending order
-	async.sortBy(foodTruckData, function(x, callback) {
-		dist = LARGE_NUMBER;
-		if (x.latitude && x.longitude) {
-			dist = foodTruck.distance(x.latitude, x.longitude, userLatitude, userLongitude);
-			winston.log("Data=" + x.location.latitude + ", " + x.location.longitude +
+	if (foodTruckData) {
+		var sortedResults;
+		var LARGE_NUMBER = 9999;
+    	//ascending order
+		async.sortBy(foodTruckData, function(x, callback) {
+			dist = LARGE_NUMBER;
+			if (x.latitude && x.longitude) {
+				dist = foodTruck.distance(x.latitude, x.longitude, userLatitude, userLongitude);
+				winston.log("Data=" + x.location.latitude + ", " + x.location.longitude +
 						 ", " + userLatitude + ", " + userLongitude + ", distance =" +
 						 dist);
-			x.distance = Number((dist).toFixed(1));
-
-		}
-		else {
-			x.distance = "Unavailable"
-		}
-		
-   	 	callback(null, dist);
-	}, function(err,result){
-    	//result callback
-    	sortedResults = result
-	});
+				x.distance = Number((dist).toFixed(1));
+			}
+			else {
+    			winston.warn('Food truck with name: ' + x.applicant + ' does not contain a lat/long');
+				x.distance = "Unavailable"
+			}
+   	 		callback(null, dist);
+		}, function(err,result){
+    		//result callback
+    		sortedResults = result
+		});
 	
-	return sortedResults;
+		return sortedResults;
+	}
+	else {
+		winston.warn('Input array not valid while sorting by distance:', foodTruckData)
+	}
 }
 
 /**
