@@ -49,6 +49,31 @@ foodTruck.filterByFoodItem = function(inputArray, searchQuery) {
 }
 
 /**
+* This method will filter the food truck data array based on distance
+* If a food truck is greater than a certain distance away from the given location, then
+* it will be filtered out
+* @param foodTruckData The array of food truck data
+* @param lat Latitude
+* @param lng Longitude
+* @param miles distance to filter based on
+* @return An array where all trucks are within "miles" miles from "lat/lng"
+*/
+foodTruck.filterByDistance = function(inputArray, lat, lng, miles) {
+    var filteredArray = inputArray.filter(function(item, pos) {
+    	if (item.latitude && item.longitude) {
+    		dist = foodTruck.distance(item.latitude, item.longitude, lat, lng);
+    		return (dist <= miles);
+    	}
+    	else {
+    		// Does not have a lat/long
+    		return false;
+    	}
+	})
+	
+	return filteredArray;
+}
+
+/**
 * This method will remove all duplicates from the given array
 * @param inputArray The input array which might contain duplicates
 * @return An array without any duplicates
@@ -76,10 +101,9 @@ foodTruck.sortByDistance = function(foodTruckData, userLatitude, userLongitude) 
     //ascending order
 	async.sortBy(foodTruckData, function(x, callback) {
 		dist = LARGE_NUMBER;
-		if (x.location) {
-			dist = foodTruck.distance(x.location.latitude, x.location.longitude,
-						userLatitude, userLongitude);
-			winston.info("Data=" + x.location.latitude + ", " + x.location.longitude +
+		if (x.latitude && x.longitude) {
+			dist = foodTruck.distance(x.latitude, x.longitude, userLatitude, userLongitude);
+			winston.log("Data=" + x.location.latitude + ", " + x.location.longitude +
 						 ", " + userLatitude + ", " + userLongitude + ", distance =" +
 						 dist);
 			x.distance = Number((dist).toFixed(1));
